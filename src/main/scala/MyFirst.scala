@@ -15,7 +15,7 @@ object MyFirst {
     var vertices = result.graph.vertices.map((tuple) => {tuple}).cache()
     for(i <- 1 to 100) {
       result = result.run(-1, MyABM.step, MyABM.send)
-      vertices = result.graph.vertices.map((tuple) => {tuple}).cache()
+      vertices = result.graph.vertices.map((tuple) => {tuple}).cache().localCheckpoint().cache()
       result = new ABMGraph[Int](vertices, edges)
       println("step "+i)
     }
